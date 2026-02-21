@@ -1,0 +1,17 @@
+{
+  "name": "tiktok-idea-generator",
+  "version": "1.0.0",
+  "description": "AI-powered TikTok content idea generator",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vercel dev",
+    "start": "node api/generate.js"
+  },
+  "keywords": ["tiktok", "ai", "content", "ideas"],
+  "author": "Wisdom",
+  "license": "MIT",
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  },
+  "type": "module"
+}

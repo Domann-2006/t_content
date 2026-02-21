@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok Content Idea Generator - AI Powered</title>
+    <meta name="description" content="Generate viral TikTok video ideas in seconds using AI">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Dark Mode Toggle -->
+    <div class="theme-toggle">
+        <button id="themeToggle" aria-label="Toggle dark mode">
+            <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">TikTok Content Idea Generator</h1>
+                <p class="hero-subtitle">Generate viral TikTok video ideas in seconds using AI</p>
+                <button class="cta-button" id="ctaButton">
+                    Get Started
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Generator Section -->
+    <section class="generator-section" id="generatorSection">
+        <div class="container">
+            <div class="generator-card">
+                <h2 class="section-title">Generate Ideas</h2>
+                <p class="section-description">Enter your niche and let AI create viral content ideas for you</p>
+                
+                <form id="generatorForm" class="generator-form">
+                    <!-- Niche Input -->
+                    <div class="form-group">
+                        <label for="nicheInput">Your Niche or Topic</label>
+                        <input 
+                            type="text" 
+                            id="nicheInput" 
+                            placeholder="e.g., fitness, cooking, tech reviews..." 
+                            maxlength="100"
+                            required
+                        >
+                        <span class="character-counter" id="charCounter">0/100</span>
+                    </div>
+
+                    <!-- Content Style Dropdown -->
+                    <div class="form-group">
+                        <label for="contentStyle">Content Style</label>
+                        <select id="contentStyle" required>
+                            <option value="Educational">Educational</option>
+                            <option value="Storytelling">Storytelling</option>
+                            <option value="Promotional">Promotional</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Motivational">Motivational</option>
+                        </select>
+                    </div>
+
+                    <!-- Number of Ideas Selector -->
+                    <div class="form-group">
+                        <label for="ideaCount">Number of Ideas</label>
+                        <div class="idea-count-selector">
+                            <button type="button" class="count-btn" data-count="5">5</button>
+                            <button type="button" class="count-btn active" data-count="10">10</button>
+                            <button type="button" class="count-btn" data-count="20">20</button>
+                        </div>
+                        <input type="hidden" id="ideaCount" value="10">
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="generate-button" id="generateButton">
+                        <span class="button-text">Generate Ideas</span>
+                        <span class="loading-spinner"></span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section class="results-section" id="resultsSection">
+        <div class="container">
+            <div class="results-header">
+                <h2 class="section-title">Your Content Ideas</h2>
+                <button class="clear-button" id="clearButton">Clear All</button>
+            </div>
+            <div class="results-grid" id="resultsGrid">
+                <!-- Results will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>TikTok Content Idea Generator</h3>
+                    <p>Built with AI</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#" class="social-link" aria-label="Twitter">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Instagram">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-link" aria-label="LinkedIn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
+                            <circle cx="4" cy="4" r="2"></circle>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+        <span id="toastMessage">Copied to clipboard!</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
