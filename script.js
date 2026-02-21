@@ -1,5 +1,4 @@
 // ====================================
-// ====================================
 // DOM Elements
 // ====================================
 const themeToggle = document.getElementById('themeToggle');
@@ -86,6 +85,7 @@ function showToast(message, duration = 3000) {
 // ====================================
 async function generateIdeas(niche, style, count) {
     try {
+        // Note the /api/generate path for Vercel
         const response = await fetch("/api/generate", {
             method: "POST",
             headers: {
@@ -190,12 +190,8 @@ async function copyToClipboard(text) {
         textArea.style.left = '-999999px';
         document.body.appendChild(textArea);
         textArea.select();
-        try {
-            document.execCommand('copy');
-            showToast('Copied to clipboard!');
-        } catch (err) {
-            showToast('Failed to copy', 2000);
-        }
+        try { document.execCommand('copy'); showToast('Copied to clipboard!'); }
+        catch (err) { showToast('Failed to copy', 2000); }
         document.body.removeChild(textArea);
     }
 }
@@ -230,36 +226,31 @@ generatorForm.addEventListener('submit', async (e) => {
     const niche = nicheInput.value.trim();
     const style = contentStyle.value;
     const count = parseInt(ideaCountInput.value);
-    if (!niche) {
-        showToast('Please enter a niche or topic', 2000);
-        nicheInput.focus();
-        return;
-    }
+    if (!niche) { showToast('Please enter a niche or topic', 2000); nicheInput.focus(); return; }
+
     generateButton.classList.add('loading');
     generateButton.disabled = true;
     const startTime = performance.now();
+
     try {
         const response = await generateIdeas(niche, style, count);
         const ideas = parseIdeas(response);
         const endTime = performance.now();
         const responseTime = ((endTime - startTime) / 1000).toFixed(2);
+
         if (ideas.length === 0) throw new Error('No ideas generated');
+
         displayResults(ideas);
         showToast(`⚡ ${ideas.length} ideas generated in ${responseTime}s!`, 4000);
+
     } catch (error) {
         console.error('Generation error:', error);
         let errorMessage = 'Failed to generate ideas. ';
-        if (error.message.includes('API key') || error.message.includes('invalid')) {
-            errorMessage += 'Please check your Groq API key.';
-        } else if (error.message.includes('rate') || error.message.includes('limit')) {
-            errorMessage += 'Rate limit reached. Please wait a moment.';
-        } else if (error.message.includes('quota')) {
-            errorMessage += 'Free tier quota exceeded. Try again later.';
-        } else if (error.message.includes('network') || error.message.includes('fetch')) {
-            errorMessage += 'Network error. Please check your connection.';
-        } else {
-            errorMessage += 'Please try again.';
-        }
+        if (error.message.includes('API key') || error.message.includes('invalid')) errorMessage += 'Please check your Groq API key.';
+        else if (error.message.includes('rate') || error.message.includes('limit')) errorMessage += 'Rate limit reached. Please wait a moment.';
+        else if (error.message.includes('quota')) errorMessage += 'Free tier quota exceeded. Try again later.';
+        else if (error.message.includes('network') || error.message.includes('fetch')) errorMessage += 'Network error. Please check your connection.';
+        else errorMessage += 'Please try again.';
         showToast(errorMessage, 4000);
     } finally {
         generateButton.classList.remove('loading');
@@ -286,11 +277,8 @@ function init() {
     console.log('Expected speed: 0.5-2 seconds per request!');
 }
 
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-} else {
-    init();
-}
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+else init();
 
 // ====================================
 // Keyboard Shortcuts
